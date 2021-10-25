@@ -22,27 +22,122 @@ def main():
     # to use your new data types.
     # all types included or used by the types specified here will also be
     # included.
-    ns_builder.include_type('ElectricalSeries', namespace='core')
+    ns_builder.include_type('Device', namespace='core')
 
     # TODO: define your new data types
     # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
     # for more information
-    tetrode_series = NWBGroupSpec(
-        neurodata_type_def='TetrodeSeries',
-        neurodata_type_inc='ElectricalSeries',
-        doc=('An extension of ElectricalSeries to include the tetrode ID for '
-             'each time series.'),
+    optic_fiber_implant = NWBGroupSpec(
+        neurodata_type_def='OpticFiberImplant',
+        neurodata_type_inc='Device',
+        doc='Optical fiber implant',
         attributes=[
             NWBAttributeSpec(
-                name='trode_id',
-                doc='The tetrode ID.',
-                dtype='int32'
-            )
+                name='angle',
+                doc='angle in degrees, relative to an unangled implant axis',
+                dtype='float',
+                required=False,
+            ),
+            NWBAttributeSpec(
+                name='ferrule_diameter',
+                doc='in mm',
+                dtype='float',
+                required=False,
+            ),
+            NWBAttributeSpec(
+                name='cannula_diameter',
+                doc='in mm',
+                dtype='float',
+                required=False,
+            ),
+            NWBAttributeSpec(
+                name='length',
+                doc='in mm',
+                dtype='float',
+                required=False,
+            ),
+            NWBAttributeSpec(
+                name='manufacturer_code',
+                doc='code from manufacturer',
+                dtype='text',
+                required=False,
+            ),
+            NWBAttributeSpec(
+                name='numerical_apperture',
+                doc='numerical apperture',
+                dtype='float',
+                required=False,
+            ),
+            NWBAttributeSpec(
+                name='transmittance',
+                doc='transmittance',
+                dtype='float',
+                required=False,
+            ),
         ],
     )
 
+    orthogonal_stereotactic_target = NWBGroupSpec(
+        neurodata_type_def='OrthogonalStereotacticTarget',
+        neurodata_type_inc='NWBContainer',
+        doc='orthogonal stereotactic target',
+        attributes=[
+            NWBAttributeSpec(
+                name='reference',
+                doc='reference point, e.g. bregma',
+                dtype='text',
+                default_value='bregma',
+            ),
+            NWBAttributeSpec(
+                name='posteroanterior',
+                doc='posteroanterior coordinates in mm',
+                dtype='float',
+            ),
+            NWBAttributeSpec(
+                name='leftright',
+                doc='leftright coordinates in mm',
+                dtype='float',
+            ),
+            NWBAttributeSpec(
+                name='superoinferior',
+                doc='superoinferior coordinates in mm',
+                dtype='float',
+            ),
+            NWBAttributeSpec(
+                name='pitch',
+                doc='pitch angle in degrees',
+                dtype='float',
+                default_value=0.,
+            ),
+            NWBAttributeSpec(
+                name='yaw',
+                doc='yaw angle in degrees',
+                dtype='float',
+                default_value=0.,
+            ),
+            NWBAttributeSpec(
+                name='roll',
+                doc='roll angle in degrees',
+                dtype='float',
+                default_value=0.,
+            ),
+            NWBAttributeSpec(
+                name='depth',
+                doc='depth in mm',
+                dtype='float',
+                required=False,
+            ),
+            NWBAttributeSpec(
+                name='qualitative_depth_reference',
+                doc='set to "dura" if the insertable is lowered to the dura before coordinate setting',
+                dtype='text',
+                default_value='dura',
+            ),
+        ]
+    )
+
     # TODO: add all of your new data types to this list
-    new_data_types = [tetrode_series]
+    new_data_types = [optic_fiber_implant, orthogonal_stereotactic_target]
 
     # export the spec to yaml files in the spec folder
     output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'spec'))

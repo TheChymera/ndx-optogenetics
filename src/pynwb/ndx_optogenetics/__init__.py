@@ -23,4 +23,5 @@ load_namespaces(ndx_optogenetics_specpath)
 
 # TODO: import your classes here or define your class using get_class to make
 # them accessible at the package level
-TetrodeSeries = get_class('TetrodeSeries', 'ndx-optogenetics')
+OpticFiberImplant = get_class('OpticFiberImplant', 'ndx-optogenetics')
+OrthogonalStereotacticTarget = get_class('OrthogonalStereotacticTarget', 'ndx-optogenetics')

@@ -9,6 +9,6 @@ namespaces:
   schema:
   - namespace: core
     neurodata_types:
-    - ElectricalSeries
+    - Device
   - source: ndx-optogenetics.extensions.yaml
   version: 0.1.0
