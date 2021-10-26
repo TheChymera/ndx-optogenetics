@@ -23,6 +23,7 @@ def main():
     # all types included or used by the types specified here will also be
     # included.
     ns_builder.include_type('Device', namespace='core')
+    ns_builder.include_type('OptogeneticStimulusSite', namespace='core')
 
     # TODO: define your new data types
     # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
@@ -79,7 +80,7 @@ def main():
 
     orthogonal_stereotactic_target = NWBGroupSpec(
         neurodata_type_def='OrthogonalStereotacticTarget',
-        neurodata_type_inc='NWBContainer',
+        neurodata_type_inc='OptogeneticStimulusSite',
         doc='orthogonal stereotactic target',
         attributes=[
             NWBAttributeSpec(
