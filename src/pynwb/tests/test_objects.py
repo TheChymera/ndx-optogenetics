@@ -31,14 +31,13 @@ class TestTetrodeSeriesConstructor(TestCase):
             )
         )
 
-        ophys_mod = self.nwbfile.create_processing_module('ophys' 'ophys')
+        ophys_mod = self.nwbfile.create_processing_module('ophys', 'ophys')
         ophys_mod.add(
             OrthogonalStereotacticTarget(
                 name='hi',
-                description='hi',
-                posteroanterior=1,
-                leftright=1,
-                superoinferior=1,
+                posteroanterior=.1,
+                leftright=.1,
+                superoinferior=.1,
             )
         )
 
