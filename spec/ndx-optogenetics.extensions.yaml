@@ -32,7 +32,7 @@ groups:
     doc: transmittance
     required: false
 - neurodata_type_def: OrthogonalStereotacticTarget
-  neurodata_type_inc: NWBContainer
+  neurodata_type_inc: OptogeneticStimulusSite
   doc: orthogonal stereotactic target
   attributes:
   - name: reference

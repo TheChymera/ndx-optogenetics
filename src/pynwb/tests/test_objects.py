@@ -7,6 +7,7 @@ from pynwb.device import Device
 from pynwb.ecephys import ElectrodeGroup
 from pynwb.file import ElectrodeTable as get_electrode_table
 from pynwb.testing import TestCase, remove_test_file, AcquisitionH5IOMixin
+from pynwb.ogen import OptogeneticSeries
 
 from ndx_optogenetics import OpticFiberImplant, OrthogonalStereotacticTarget
 
@@ -31,15 +32,32 @@ class TestTetrodeSeriesConstructor(TestCase):
             )
         )
 
+        site = OrthogonalStereotacticTarget(
+            name='hi',
+            description='hi',
+            device=device,
+            excitation_lambda=np.nan,
+            location='hippocampus',
+            posteroanterior=1.,
+            leftright=1.,
+            superoinferior=1.,
+        )
+
+        self.nwbfile.add_ogen_site(site)
+
         ophys_mod = self.nwbfile.create_processing_module('ophys', 'ophys')
         ophys_mod.add(
-            OrthogonalStereotacticTarget(
-                name='hi',
-                posteroanterior=.1,
-                leftright=.1,
-                superoinferior=.1,
+            OptogeneticSeries(
+                name='my_series',
+                description='no description',
+                data=[1., 2., 3.,],
+                rate=1.,
+                site=site,
             )
         )
+
+        with NWBHDF5IO('test_ogen.nwb', 'w') as io:
+            io.write(self.nwbfile)
 
         # self.assertEqual(tetrode_series.name, 'name')
         # self.assertEqual(tetrode_series.description, 'description')
