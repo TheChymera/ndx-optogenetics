@@ -22,7 +22,7 @@ class TestTetrodeSeriesConstructor(TestCase):
         )
 
     def test_constructor(self):
-        device = nwbfile.add_device(
+        device = self.nwbfile.add_device(
             OpticFiberImplant(
                 name='my_fiber',
                 description='no description',
@@ -31,7 +31,7 @@ class TestTetrodeSeriesConstructor(TestCase):
             )
         )
 
-        ophys_mod = nwbfile.create_processing_module('ophys' 'ophys')
+        ophys_mod = self.nwbfile.create_processing_module('ophys' 'ophys')
         ophys_mod.add(
             OrthogonalStereotacticTarget(
                 name='hi',
